@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "merchant discounts" do
+RSpec.describe "merchant discounts index" do
   before :each do 
     @merchant1 = Merchant.create!(name: "Hair Care")
     @discount1 = BulkDiscount.create!(name: "10 or more", threshold: 10, percentage: 10, merchant_id: @merchant1.id)
@@ -69,8 +69,13 @@ RSpec.describe "merchant discounts" do
     within "#discount-#{@discount1.id}" do 
       click_button("Delete discount")
     end
-    
+
     expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
     expect(page).to_not have_content(@discount1)
+  end
+
+  it "redirects a user to a discounts show page" do 
+    click_link(@discount1.name)
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount1.id}")
   end
 end
