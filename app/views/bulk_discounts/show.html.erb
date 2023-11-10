@@ -5,3 +5,5 @@
   <p><h3>Discount threshold:</h3> <%= @discount.threshold %> items </p>
   <p><h3>Discount percentage:</h3> <%= @discount.percentage %>% </p>
 </br>
+
+<%= link_to "Edit discount", "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit" %>
