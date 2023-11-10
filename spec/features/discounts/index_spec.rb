@@ -58,4 +58,19 @@ RSpec.describe "merchant discounts" do
     expect(page).to have_content("Error: All fields must be filled in to submit")
     expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/new")
   end
+
+  it "has a button to delete  discount" do 
+    within "#discount-#{@discount1.id}" do 
+      expect(page).to have_button("Delete discount")
+    end
+  end
+
+  it "deletes a discount from a merchants discount index page" do 
+    within "#discount-#{@discount1.id}" do 
+      click_button("Delete discount")
+    end
+    
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
+    expect(page).to_not have_content(@discount1)
+  end
 end

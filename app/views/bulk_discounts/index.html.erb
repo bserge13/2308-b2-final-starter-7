@@ -1,7 +1,11 @@
 <h2> <%= @merchant.name %> Discounts Index Page </h2>
 
   <% @discounts.each do |discount| %>
-  <ol>Discount: <%= link_to "#{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>, Threshold: <%= discount.threshold %> items, Percentage: <%= discount.percentage %>% </ol>
+  <div id="discount-<%= discount.id %>">
+  <ol>Discount: <%= link_to "#{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>, Threshold: <%= discount.threshold %> items, Percentage: <%= discount.percentage %>% 
+  <%= button_to "Delete discount", merchant_discount_path(@merchant, discount), method: :delete %>
+  </ol>
+  </div>
   <% end %> 
 
   <%= link_to "Create new discount", "/merchants/#{@merchant.id}/discounts/new" %>
