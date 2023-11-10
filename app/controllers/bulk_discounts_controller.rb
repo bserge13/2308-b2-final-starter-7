@@ -37,6 +37,10 @@ class BulkDiscountsController < ApplicationController
     @discount = BulkDiscount.find(params[:id]) 
   end
 
+  def update 
+    
+  end
+
   private 
 
   def discount_params 
