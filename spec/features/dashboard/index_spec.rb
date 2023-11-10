@@ -139,7 +139,7 @@ RSpec.describe "merchant dashboard" do
       @discount1 = BulkDiscount.create!(name: "10 or more", threshold: 10, percentage: 10, merchant_id: @merchant1.id)
     end 
 
-    it "shows all discounts on a merchants invoice page" do 
+    it "has a link to a merchants discounts index page" do 
       visit merchant_dashboard_index_path(@merchant1)
 
       expect(page).to have_link("Bulk Discounts")

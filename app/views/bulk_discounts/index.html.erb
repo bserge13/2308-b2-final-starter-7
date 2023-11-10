@@ -1,0 +1,5 @@
+<h2> <%= @merchant.name %> Discounts Index Page </h2>
+
+  <% @discounts.each do |discount| %>
+  <ol>Discount: <%= link_to "#{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>, Threshold: <%= discount.threshold %> items, Percentage: <%= discount.percentage %>% </ol>
+  <% end %> 
