@@ -3,3 +3,5 @@
   <% @discounts.each do |discount| %>
   <ol>Discount: <%= link_to "#{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %>, Threshold: <%= discount.threshold %> items, Percentage: <%= discount.percentage %>% </ol>
   <% end %> 
+
+  <%= link_to "Create new discount", "/merchants/#{@merchant.id}/discounts/new" %>
