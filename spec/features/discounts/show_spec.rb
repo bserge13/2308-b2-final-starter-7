@@ -13,6 +13,7 @@ RSpec.describe "merchant discounts show" do
     expect(page).to have_content(@discount1.name)
     expect(page).to have_content(@discount1.threshold)
     expect(page).to have_content(@discount1.percentage)
+    save_and_open_page
   end
 
   it "has a link to edit a discount" do 

@@ -1,15 +1,15 @@
-<h3> Edit <%= @merchant.name%> discount: <%= @discount.name %> </h2>
+<h3> Edit discount </h2>
 
-<%= form_with url: "/merchants/#{@merchant.id}/discounts", method: :post, data: {turbo: false} do |f| %>
+<%= form_with url: "/merchants/#{@merchant.id}/discounts/#{@discount.id}", method: :patch, data: {turbo: false} do |f| %>
 
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name, :value => @discount.name %>
   
   <%= f.label :threshold %>
-  <%= f.number_field :threshold %>
+  <%= f.number_field :threshold, :value => @discount.threshold %>
   
   <%= f.label :percentage %>
-  <%= f.number_field :percentage %>
+  <%= f.number_field :percentage, :value => @discount.percentage %>
 
-  <%= f.submit "Create" %>
+  <%= f.submit "Update" %>
 <% end %>
