@@ -11,8 +11,13 @@
   <br>
 
   <p> Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
-  <p>Total Revenue: <%= @invoice.total_revenue %></p>
-  <p> Total discounted revenue:  <%= @invoice.discounted_revenue %></p>
+  <p> Total Revenue: <%= @invoice.total_revenue %></p>
+  <p> Total Discounted Revenue:  <%= @invoice.discounted_revenue %></p>
+  <%
+=begin%>
+ <p> Dicount applied: <%= link_to "#{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></p> 
+<%
+=end%>
 
 
   <h4>Customer:</h4>
