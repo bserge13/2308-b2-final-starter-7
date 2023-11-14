@@ -126,7 +126,7 @@ RSpec.describe "merchant dashboard" do
 
       expect(page).to have_link("Bulk Discounts")
       click_link("Bulk Discounts")
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
+      expect(current_path).to eq(merchant_discounts_path(@merchant1))
     end
   end
 end
