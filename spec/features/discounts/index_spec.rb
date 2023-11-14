@@ -12,22 +12,25 @@ RSpec.describe "merchant discounts index" do
   it "has a discount index page with links to discounts show pages" do 
     expect(page).to have_content("#{@merchant1.name} Discounts Index Page")
     
-    expect(page).to have_link(@discount1.name)
-    expect(page).to have_content(@discount1.threshold)
-    expect(page).to have_content(@discount1.percentage)
-    
-    expect(page).to have_link(@discount2.name)
-    expect(page).to have_content(@discount2.threshold)
-    expect(page).to have_content(@discount2.percentage)
+    within "#discount-#{@discount1.id}" do 
+      expect(page).to have_link(@discount1.name)
+      expect(page).to have_content(@discount1.threshold)
+      expect(page).to have_content(@discount1.percentage)
+    end 
 
-    click_link(@discount2.name)
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount2.id}")
+    within "#discount-#{@discount2.id}" do 
+      expect(page).to have_link(@discount2.name)
+      expect(page).to have_content(@discount2.threshold)
+      expect(page).to have_content(@discount2.percentage)
+      click_link(@discount2.name)
+      expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount2.id}")
+    end
   end
 
   it "has a link to create new discounts" do 
     expect(page).to have_link("Create new discount")
     click_link("Create new discount")
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/new")
+    expect(current_path).to eq(new_merchant_discount_path(@merchant1))
   end
 
   it "has a button to delete a discount" do 

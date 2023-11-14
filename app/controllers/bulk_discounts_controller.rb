@@ -17,10 +17,10 @@ class BulkDiscountsController < ApplicationController
     merchant = Merchant.find(params[:merchant_id])
     discount = merchant.bulk_discounts.new(discount_params)
     if discount.save 
-      redirect_to "/merchants/#{merchant.id}/discounts"
+      redirect_to merchant_discounts_path(merchant)
     else 
       flash[:error] = "Error: All fields must be filled in to submit"
-      redirect_to "/merchants/#{merchant.id}/discounts/new"
+      redirect_to new_merchant_discount_path(merchant)
     end
   end
 
@@ -29,7 +29,7 @@ class BulkDiscountsController < ApplicationController
     discount = BulkDiscount.find(params[:id])
     
     discount.destroy
-    redirect_to "/merchants/#{merchant.id}/discounts"
+    redirect_to merchant_discounts_path(merchant)
   end
 
   def edit 
@@ -42,7 +42,7 @@ class BulkDiscountsController < ApplicationController
     discount = BulkDiscount.find(params[:id])
 
     discount.update(discount_params)
-    redirect_to "/merchants/#{merchant.id}/discounts/#{discount.id}"
+    redirect_to merchant_discount_path(merchant, discount)
   end
 
   private 
