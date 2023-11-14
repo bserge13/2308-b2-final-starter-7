@@ -13,11 +13,16 @@
   <p> Created on: <%= @invoice.created_at.strftime("%A, %B %-d, %Y") %></p>
   <p> Total Revenue: <%= @invoice.total_revenue %></p>
   <p> Total Discounted Revenue:  <%= @invoice.discounted_revenue %></p>
-  <%
-=begin%>
- <p> Dicount applied: <%= link_to "#{discount.name}", "/merchants/#{@merchant.id}/discounts/#{discount.id}" %></p> 
-<%
-=end%>
+
+  <p> Discount applied: </p>
+  
+  <% @invoice_item.item.merchant.bulk_discounts.each do |discount| %>
+    <% discount.invoice_items.each do |invoice_item| %>
+      <% if invoice_item.quantity >= discount.threshold %>      
+        <p><%= link_to discount.name, merchant_discount_path(@merchant, discount) %></p>
+      <% end %>
+    <% end %>
+  <% end %>
 
 
   <h4>Customer:</h4>

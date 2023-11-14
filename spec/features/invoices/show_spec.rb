@@ -112,13 +112,16 @@ RSpec.describe "invoices show" do
       # 54 being 25% off of the $72 revenue from @ii_11 that meets the threshold requirement of 10 items or more 
     end 
 
-    # it "shows the discount applied as a link to the discounts show page" do 
-    #   visit merchant_invoice_path(@merchant1, @invoice_1)
+    it "shows the discount applied as a link to the discounts show page" do 
+      visit merchant_invoice_path(@merchant1, @invoice_1)
 
-    #   expect(page).to have_content("Dicount applied:")
-    #   expect(page).to have_link(@discount1.name)
-    #   expect(page).to_not have_link(@discount2.name)
-    #   expect(page).to_not have_link(@discount3.name)
-    # end
+      expect(page).to have_content("Discount applied:")
+      expect(page).to have_link(@discount1.name)
+      expect(page).to_not have_link(@discount2.name)
+      expect(page).to_not have_link(@discount3.name)
+
+      click_link(@discount1.name)
+      expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
+    end
   end
 end

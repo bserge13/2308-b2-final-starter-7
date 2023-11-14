@@ -76,7 +76,7 @@ describe "Admin Invoices Index Page" do
 
   describe "admin invoice discount revenue" do 
     it "shows the discounted revenue on an admin invoice show page" do 
-      expect(page).to have_content("Total Discounted Revenue: 18.0")
+      expect(page).to have_content("Total Discounted Revenue: $18.00")
     end
   end
 end
