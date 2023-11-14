@@ -1,6 +1,6 @@
 <h3> Edit discount </h2>
 
-<%= form_with url: "/merchants/#{@merchant.id}/discounts/#{@discount.id}", method: :patch, data: {turbo: false} do |f| %>
+<%= form_with url: merchant_discount_path(@merchant, @discount), method: :patch, data: {turbo: false} do |f| %>
 
   <%= f.label :name %>
   <%= f.text_field :name, :value => @discount.name %>

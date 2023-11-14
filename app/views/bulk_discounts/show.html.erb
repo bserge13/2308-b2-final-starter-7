@@ -6,4 +6,4 @@
   <p><h3>Discount percentage:</h3> <%= @discount.percentage %>% </p>
 </br>
 
-<%= link_to "Edit discount", "/merchants/#{@merchant.id}/discounts/#{@discount.id}/edit" %>
+<%= link_to "Edit discount", edit_merchant_discount_path(@merchant, @discount) %>
