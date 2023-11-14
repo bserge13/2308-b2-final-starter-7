@@ -5,7 +5,7 @@ RSpec.describe "merchant discounts show" do
     @merchant1 = Merchant.create!(name: "Hair Care")
     @discount1 = BulkDiscount.create!(name: "10 or more", threshold: 10, percentage: 10, merchant_id: @merchant1.id)
 
-    visit "/merchants/#{@merchant1.id}/discounts/#{@discount1.id}"
+    visit merchant_discount_path(@merchant1, @discount1)
   end
 
   it "has a discount show page for a specific discount" do 
@@ -21,7 +21,7 @@ RSpec.describe "merchant discounts show" do
 
   it "redirects a user to an edit page where a discount can be updated" do 
     click_link("Edit discount")
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount1.id}/edit")
+    expect(current_path).to eq(edit_merchant_discount_path(@merchant1, @discount1))
   end
 end 
 

@@ -4,7 +4,7 @@ RSpec.describe "merchant discounts index" do
   before :each do 
     @merchant1 = Merchant.create!(name: "Hair Care")
     @discount1 = BulkDiscount.create!(name: "10 or more", threshold: 10, percentage: 10, merchant_id: @merchant1.id)    
-    visit "/merchants/#{@merchant1.id}/discounts/#{@discount1.id}/edit"
+    visit edit_merchant_discount_path(@merchant1, @discount1)
   end
 
   it "has a form to edit a discount with a discounts information pre-filled in" do 
@@ -22,7 +22,7 @@ RSpec.describe "merchant discounts index" do
     fill_in "Percentage", with: 25
     click_button "Update"
 
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount1.id}")
+    expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
     
     expect(page).to have_content("Christmas Special")
     expect(page).to have_content("12 items")

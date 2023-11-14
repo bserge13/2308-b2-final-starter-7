@@ -6,7 +6,7 @@ RSpec.describe "merchant discounts index" do
     @discount1 = BulkDiscount.create!(name: "10 or more", threshold: 10, percentage: 10, merchant_id: @merchant1.id)
     @discount2 = BulkDiscount.create!(name: "15 or more", threshold: 15, percentage: 15, merchant_id: @merchant1.id)
     
-    visit "/merchants/#{@merchant1.id}/discounts/new"
+    visit new_merchant_discount_path(@merchant1)
   end 
 
   it "has a form to create a new discount on a new discount page" do 
@@ -22,7 +22,7 @@ RSpec.describe "merchant discounts index" do
     fill_in "Percentage", with: 20
     click_button "Create"
 
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
+    expect(current_path).to eq(merchant_discounts_path(@merchant1))
     
     expect(page).to have_link("20 or more")
     expect(page).to have_content("Threshold: 20 items")
@@ -32,6 +32,6 @@ RSpec.describe "merchant discounts index" do
   it "flashes an error message when given invalid data for creating" do 
     click_button "Create"
     expect(page).to have_content("Error: All fields must be filled in to submit")
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/new")
+    expect(current_path).to eq(new_merchant_discount_path(@merchant1))
   end
 end 

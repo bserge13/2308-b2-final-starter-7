@@ -6,7 +6,7 @@ RSpec.describe "merchant discounts index" do
     @discount1 = BulkDiscount.create!(name: "10 or more", threshold: 10, percentage: 10, merchant_id: @merchant1.id)
     @discount2 = BulkDiscount.create!(name: "15 or more", threshold: 15, percentage: 15, merchant_id: @merchant1.id)
     
-    visit "/merchants/#{@merchant1.id}/discounts"
+    visit merchant_discounts_path(@merchant1)
   end 
 
   it "has a discount index page with links to discounts show pages" do 
@@ -23,7 +23,7 @@ RSpec.describe "merchant discounts index" do
       expect(page).to have_content(@discount2.threshold)
       expect(page).to have_content(@discount2.percentage)
       click_link(@discount2.name)
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount2.id}")
+      expect(current_path).to eq(merchant_discount_path(@merchant1, @discount2))
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe "merchant discounts index" do
   it "deletes a discount from a merchants discount index page" do 
     within "#discount-#{@discount1.id}" do 
       click_button("Delete discount")
-      expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts")
+      expect(current_path).to eq(merchant_discounts_path(@merchant1))
     end
 
     expect(page).to_not have_content(@discount1)
@@ -50,6 +50,6 @@ RSpec.describe "merchant discounts index" do
 
   it "redirects a user to a discounts show page" do 
     click_link(@discount1.name)
-    expect(current_path).to eq("/merchants/#{@merchant1.id}/discounts/#{@discount1.id}")
+    expect(current_path).to eq(merchant_discount_path(@merchant1, @discount1))
   end
 end
